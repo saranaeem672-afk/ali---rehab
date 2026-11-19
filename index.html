@@ -1,0 +1,608 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#241a16">
+  <title>Ali &amp; Rehab | Engagement Invitation</title>
+
+  <!-- تحميل الخط -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* الألوان والإعدادات العامة */
+    :root {
+      --gold: #d2b77d;
+      --cream: #f5ebd8;
+      --dark: #211815;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--dark);
+      color: var(--cream);
+      font-family: "Cormorant Garamond", Georgia, serif;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    /* صورة الباب ثابتة قبل فتح الدعوة وبعده */
+    .experience {
+      min-height: 100vh;
+      min-height: 100svh;
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      background:
+        linear-gradient(#160e0870, #160e0844 42%, #160e0877),
+        url("images/WhatsApp Image 2026-11-19 at 8.05.14 PM.jpeg") center / cover fixed;
+    }
+
+    /* الدعوة تكون مخفية قبل الضغط */
+    .reveal {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      min-height: 100svh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 35px 16px;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(18px) scale(.985);
+      transition: opacity 1.2s ease .3s, transform 1.2s ease .3s;
+    }
+
+    /* صندوق محتوى الدعوة */
+    .content {
+      width: min(560px, 100%);
+      padding: 20px;
+      background: linear-gradient(180deg, #2119147a, #211914b8);
+      backdrop-filter: blur(2px);
+      border: 1px solid #d2b77d88;
+      box-shadow: 0 20px 80px #100a08a8;
+    }
+
+    /* إطار صورة العروسين المستطيل */
+    .portrait-wrap {
+      width: min(300px, 78vw);
+      aspect-ratio: 4 / 5;
+      margin: 0 auto 12px;
+      padding: 7px;
+      background: linear-gradient(135deg, #f4e2b5, #886438 35%, #e1c27d 55%, #6f4b28);
+      box-shadow: 0 8px 35px #080605a8;
+      border: 1px solid #f0d69c;
+    }
+
+    /* صورة علي ورحاب */
+    .portrait {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      object-position: center 38%;
+      filter: sepia(.12) contrast(1.03);
+    }
+
+    /* الزخرفة أعلى الأسماء */
+    .ornament {
+      font-family: serif;
+      color: var(--gold);
+      font-size: 20px;
+      letter-spacing: 8px;
+      margin: 0 0 4px;
+    }
+
+    /* أسماء العروسين */
+    .names {
+      margin: 2px 0 8px;
+      font-size: clamp(43px, 10vw, 66px);
+      line-height: 1.2;
+      font-weight: 400;
+      color: #fff4dc;
+      text-shadow: 0 3px 18px #1b0e0b;
+    }
+
+    /* القلب بين الاسمين */
+    .heart {
+      font-size: 22px;
+      color: #e3c581;
+      margin: 0 8px;
+    }
+
+    /* رسالة الدعوة */
+    .tagline {
+      font-size: 20px;
+      line-height: 1.5;
+      max-width: 450px;
+      margin: 8px auto 18px;
+      color: #f4ead8;
+    }
+
+    /* كل جملة تظهر في سطر مستقل */
+    .tagline span {
+      display: block;
+    }
+
+    /* عداد الوقت */
+    .countdown {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin: 0 auto 16px;
+      direction: ltr;
+    }
+
+    .count-unit {
+      min-width: 58px;
+      padding: 5px 7px 3px;
+      background: #160f0dbb;
+      border: 1px solid #d2b77d66;
+    }
+
+    .count-unit strong {
+      display: block;
+      font-size: 21px;
+      line-height: 1.15;
+      color: #f0d69c;
+      font-weight: 600;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .count-unit span {
+      display: block;
+      font-family: Georgia, serif;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 9px;
+      color: #e4d2af;
+    }
+
+    /* التاريخ والمكان */
+    .event {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      align-items: center;
+      margin: 12px auto 16px;
+      color: #fff2d7;
+    }
+
+    .event-item {
+      min-width: 100px;
+    }
+
+    .event-item strong {
+      display: block;
+      font-size: 19px;
+      font-weight: 700;
+      color: #e5cc91;
+    }
+
+    .event-item span {
+      font-size: 14px;
+    }
+
+    .separator {
+      height: 34px;
+      border-right: 1px solid #d2b77d99;
+    }
+
+    /* بطاقة رابط الخريطة */
+    .location-card {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      width: min(410px, 100%);
+      margin: 4px auto 0;
+      padding: 9px;
+      text-align: left;
+      text-decoration: none;
+      color: #fff2d7;
+      border: 1px solid #d2b77d;
+      background: linear-gradient(135deg, #35291fcc, #1d1715ee);
+      box-shadow: 0 8px 26px #10090677;
+      transition: transform .25s, background .25s;
+    }
+
+    .location-card:hover {
+      transform: translateY(-3px);
+      background: #3b2d21;
+    }
+
+    /* رسمة الخريطة */
+    .map-art {
+      position: relative;
+      flex: 0 0 108px;
+      height: 78px;
+      overflow: hidden;
+      border: 1px solid #d2b77d88;
+      background:
+        linear-gradient(27deg, transparent 0 32%, #b8a982 33% 36%, transparent 37%),
+        linear-gradient(148deg, transparent 0 45%, #c5b58e 46% 50%, transparent 51%),
+        linear-gradient(90deg, transparent 0 63%, #d7c9a7 64% 68%, transparent 69%),
+        repeating-linear-gradient(0deg, #d9d0b7 0 1px, #e9dfc9 1px 20px),
+        repeating-linear-gradient(90deg, transparent 0 23px, #c7b995 24px 25px, transparent 26px 46px);
+    }
+
+    .map-art::after {
+      content: "OUR LOCATION";
+      position: absolute;
+      left: 5px;
+      top: 5px;
+      padding: 2px 5px;
+      background: #f5ebd8e8;
+      color: #493b2b;
+      font: 600 8px Georgia, serif;
+      letter-spacing: 1px;
+    }
+
+    /* دبوس الموقع */
+    .map-pin {
+      position: absolute;
+      z-index: 1;
+      left: 55%;
+      top: 42%;
+      width: 18px;
+      height: 18px;
+      border-radius: 50% 50% 50% 0;
+      transform: rotate(-45deg);
+      background: #702e3c;
+      border: 2px solid #f3dfae;
+      box-shadow: 0 2px 7px #24140f99;
+    }
+
+    .map-pin::after {
+      content: "";
+      position: absolute;
+      left: 5px;
+      top: 5px;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: #f8e9c7;
+    }
+
+    /* نص الموقع */
+    .location-copy {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .location-copy strong {
+      font-size: 20px;
+      font-weight: 600;
+      color: #f0d69c;
+    }
+
+    .location-copy small {
+      font: 11px Georgia, serif;
+      color: #dfd1b6;
+    }
+
+    /* مساحة بتلات الورد الجوري الحمراء */
+    .petals {
+      position: absolute;
+      z-index: 5;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    /* شكل البتلة الحمراء */
+    .petal {
+      position: absolute;
+      top: -35px;
+      left: var(--left);
+      width: var(--size);
+      height: calc(var(--size) * 1.45);
+      border-radius: 95% 5% 82% 18%;
+      background: linear-gradient(140deg, #ff9a9e 0%, #ed394b 36%, #b5122d 72%, #760d24 100%);
+      box-shadow: inset 2px 1px 3px #ffd0c255, 0 2px 5px #30050b66;
+      opacity: 0;
+      transform-origin: center;
+      animation: petal-fall var(--duration) ease-in var(--delay) infinite;
+    }
+
+    /* عرق خفيف داخل البتلة */
+    .petal::after {
+      content: "";
+      position: absolute;
+      left: 49%;
+      top: 14%;
+      width: 1px;
+      height: 70%;
+      background: linear-gradient(transparent, #ffd0c277, transparent);
+      transform: rotate(-18deg);
+    }
+
+    /* حركة تساقط البتلات */
+    @keyframes petal-fall {
+      0% {
+        opacity: 0;
+        transform: translate3d(0, -4vh, 0) rotate(0deg);
+      }
+
+      10% {
+        opacity: .88;
+      }
+
+      50% {
+        transform: translate3d(var(--drift), 52vh, 0) rotate(230deg);
+      }
+
+      88% {
+        opacity: .78;
+      }
+
+      100% {
+        opacity: 0;
+        transform: translate3d(calc(var(--drift) * -.55), 108vh, 0) rotate(520deg);
+      }
+    }
+
+    /* بطاقة البداية */
+    .gate {
+      position: absolute;
+      z-index: 4;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: min(380px, 84vw);
+      text-align: center;
+      transition: opacity .35s ease, transform .5s ease;
+    }
+
+    .gate-inner {
+      padding: 25px 18px 22px;
+      background: linear-gradient(#281c17ec, #281c17e8);
+      border: 1px solid #d2b77d;
+      outline: 1px solid #d2b77d66;
+      outline-offset: 5px;
+      box-shadow: 0 12px 50px #0906059c;
+    }
+
+    .gate-symbol {
+      font-family: serif;
+      color: var(--gold);
+      font-size: 30px;
+      margin: 0 0 4px;
+    }
+
+    .gate h1 {
+      font-weight: 400;
+      font-size: clamp(28px, 7vw, 38px);
+      line-height: 1.5;
+      margin: 0;
+      color: #fff1d6;
+    }
+
+    /* زر فتح الدعوة */
+    .open-button {
+      cursor: pointer;
+      border: 1px solid var(--gold);
+      background: #8c6738;
+      color: #fff1d6;
+      padding: 10px 26px;
+      min-width: 172px;
+      box-shadow: 0 4px 18px #10090677;
+      transition: background .2s, transform .2s;
+    }
+
+    .open-button:hover {
+      background: #a17a45;
+      transform: translateY(-2px);
+    }
+
+    /* إخفاء بطاقة البداية بعد الضغط */
+    .experience.opened .gate {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(.94);
+      pointer-events: none;
+    }
+
+    /* إظهار الدعوة مع بقاء صورة الباب خلفها */
+    .experience.opened .reveal {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ضبط الشكل على الشاشات القصيرة */
+    @media (max-height: 720px) {
+      .content {
+        padding: 14px;
+      }
+
+      .portrait-wrap {
+        width: min(240px, 68vw);
+        margin-bottom: 8px;
+      }
+
+      .tagline {
+        font-size: 18px;
+        margin: 5px auto 10px;
+      }
+
+      .event {
+        margin: 8px auto 10px;
+      }
+    }
+
+    /* تقليل الحركة حسب إعدادات الجهاز */
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        transition-duration: .01ms !important;
+        animation-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- الصفحة الرئيسية للدعوة -->
+  <main class="experience" id="experience">
+
+    <!-- تفاصيل الدعوة التي تظهر بعد الضغط -->
+    <section class="reveal" aria-label="Ali and Rehab's engagement invitation" aria-hidden="true">
+      <div class="content">
+
+        <!-- إطار صورة العروسين -->
+        <div class="portrait-wrap">
+          <img class="portrait" src="ali-rehab.jpeg" alt="Ali and Rehab">
+        </div>
+
+        <!-- الزخرفة والأسماء -->
+        <p class="ornament" aria-hidden="true">❧ ✦ ❧</p>
+        <h2 class="names">Ali <span class="heart">♥</span> Rehab</h2>
+
+        <!-- الجملتان تظهران في سطرين منفصلين -->
+        <p class="tagline">
+          <span>We're so happy to share our special day with you.</span>
+          <span>Your presence means the world to us.</span>
+        </p>
+
+        <!-- عداد المناسبة -->
+        <div class="countdown" aria-label="Countdown to the celebration">
+          <div class="count-unit"><strong id="days">000</strong><span>Days</span></div>
+          <div class="count-unit"><strong id="hours">00</strong><span>Hours</span></div>
+          <div class="count-unit"><strong id="minutes">00</strong><span>Minutes</span></div>
+          <div class="count-unit"><strong id="seconds">00</strong><span>Seconds</span></div>
+        </div>
+
+        <!-- تاريخ ومكان المناسبة -->
+        <div class="event">
+          <div class="event-item">
+            <strong id="date">December 12, 2026</strong>
+            <span>Date</span>
+          </div>
+
+          <div class="separator" aria-hidden="true"></div>
+
+          <div class="event-item">
+            <strong id="venue">The Palace</strong>
+            <span>Venue</span>
+          </div>
+        </div>
+
+        <!-- بطاقة فتح موقع المناسبة -->
+        <a class="location-card" id="mapLink" href="https://maps.app.goo.gl/yfvbytpW5KFF2ajUA?g_st=aw" target="_blank" rel="noreferrer" aria-label="Open The Palace location in Google Maps">
+          <span class="map-art" aria-hidden="true">
+            <span class="map-pin"></span>
+          </span>
+
+          <span class="location-copy">
+            <strong>Our Location</strong>
+            <small>Tap to open in Google Maps ↗</small>
+          </span>
+        </a>
+      </div>
+    </section>
+
+    <!-- بتلات الورد الجوري الحمراء -->
+    <div class="petals" id="petals" aria-hidden="true"></div>
+
+    <!-- بطاقة البداية والزر -->
+    <div class="gate">
+      <div class="gate-inner">
+        <p class="gate-symbol" aria-hidden="true">❧</p>
+        <h1>Ali &amp; Rehab</h1>
+        <button class="open-button" id="openButton" type="button">Open the Invitation</button>
+      </div>
+    </div>
+
+    <!-- ملف الأغنية الموجود بجانب ملف HTML -->
+    <audio id="invitationSong" preload="auto">
+      <source src="WhatsApp%20Audio%202026-11-19%20at%2010.16.15%20PM.mpeg" type="audio/mpeg">
+    </audio>
+  </main>
+
+  <!-- كود التاريخ والعداد وتشغيل الأغنية والبتلات -->
+  <script>
+    // بيانات التاريخ والمكان والخريطة.
+    const invitation = {
+      date: "December 12, 2026",
+      venue: "The Palace",
+      map: "https://maps.app.goo.gl/yfvbytpW5KFF2ajUA?g_st=aw",
+      eventAt: "2026-12-12T00:00:00+02:00"
+    };
+
+    // وضع التاريخ والمكان والرابط في الصفحة.
+    document.getElementById("date").textContent = invitation.date;
+    document.getElementById("venue").textContent = invitation.venue;
+    document.getElementById("mapLink").href = invitation.map;
+
+    // تحديد موعد المناسبة للعداد.
+    const eventTime = new Date(invitation.eventAt).getTime();
+
+    // أسماء خانات العداد.
+    const countdownIds = ["days", "hours", "minutes", "seconds"];
+
+    // حساب الوقت المتبقي وتحديث العداد.
+    function updateCountdown() {
+      const remaining = Math.max(0, eventTime - Date.now());
+
+      const values = [
+        Math.floor(remaining / 86400000),
+        Math.floor((remaining % 86400000) / 3600000),
+        Math.floor((remaining % 3600000) / 60000),
+        Math.floor((remaining % 60000) / 1000)
+      ];
+
+      values.forEach((value, index) => {
+        document.getElementById(countdownIds[index]).textContent =
+          index === 0 ? String(value) : String(value).padStart(2, "0");
+      });
+    }
+
+    // تحديث العداد فورًا ثم كل ثانية.
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    // الوصول للزر والصفحة والأغنية.
+    const experience = document.getElementById("experience");
+    const openButton = document.getElementById("openButton");
+    const invitationSong = document.getElementById("invitationSong");
+
+    // فتح الدعوة وتشغيل الأغنية وإنزال البتلات.
+    openButton.addEventListener("click", () => {
+      experience.classList.add("opened");
+      document.querySelector(".reveal").setAttribute("aria-hidden", "false");
+
+      // تشغيل الأغنية بعد الضغط على الزر.
+      invitationSong.play().catch(() => {
+        console.log("تأكدي إن ملف الأغنية موجود بجانب ملف HTML.");
+      });
+
+      // إنشاء بتلات الورد الجوري الحمراء.
+      const petals = document.getElementById("petals");
+
+      // منع تكرار البتلات عند الضغط أكثر من مرة.
+      if (petals.childElementCount) return;
+
+      // إنشاء 32 بتلة بأحجام ومواعيد نزول مختلفة.
+      for (let i = 0; i < 32; i++) {
+        const petal = document.createElement("i");
+        petal.className = "petal";
+        petal.style.setProperty("--left", `${Math.random() * 100}%`);
+        petal.style.setProperty("--size", `${9 + Math.random() * 10}px`);
+        petal.style.setProperty("--duration", `${5.5 + Math.random() * 4}s`);
+        petal.style.setProperty("--delay", `${Math.random() * 7}s`);
+        petal.style.setProperty("--drift", `${-60 + Math.random() * 120}px`);
+        petals.appendChild(petal);
+      }
+    });
+  </script>
+</body>
+</html>
